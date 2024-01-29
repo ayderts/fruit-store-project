@@ -23,18 +23,23 @@ class FruitItemController extends Controller
      * FruitCategoryController constructor.
      * @param FruitItemService $fruitItemService
      */
-    public function __construct(FruitItemService $fruitItemService,)
+    public function __construct(FruitItemService $fruitItemService)
     {
         $this->fruitItemService = $fruitItemService;
     }
 
-
+    /**
+     * @return AnonymousResourceCollection
+     */
     public function index() : AnonymousResourceCollection
     {
         return $this->fruitItemService->index();
     }
 
-
+    /**
+     * @param FruitItem $fruitItem
+     * @return FruitItemResource
+     */
     public function show(FruitItem $fruitItem) : FruitItemResource
     {
         return $this->fruitItemService->show($fruitItem);
@@ -69,7 +74,9 @@ class FruitItemController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param FruitItemUpdateRequest $request
+     * @param FruitItem $fruitItem
+     * @return FruitItemResource
      */
     public function update(FruitItemUpdateRequest $request, FruitItem $fruitItem) : FruitItemResource
     {
@@ -77,7 +84,8 @@ class FruitItemController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param FruitItem $fruitItem
+     * @return JsonResponse
      */
     public function destroy(FruitItem $fruitItem) : JsonResponse
     {

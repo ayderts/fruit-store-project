@@ -24,8 +24,8 @@ class InvoiceUpdateRequest extends FormRequest
         return [
             'customer_name' => 'string',
             'fruit_items' => 'array',
-            'fruit_items.*.id' => 'exists:fruit_items,id',
-            'fruit_items.*.quantity' => 'integer|min:1',
+            'fruit_items.*.id' => 'required_with:fruit_items|exists:fruit_items,id',
+            'fruit_items.*.quantity' => 'required_with:fruit_items|integer|min:1',
         ];
     }
 }

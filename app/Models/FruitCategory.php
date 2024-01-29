@@ -11,4 +11,8 @@ class FruitCategory extends Model
     public $guarded = [
         'id'
     ];
+    public function fruit_items()
+    {
+        return $this->hasMany(FruitItem::class);
+    }
 }

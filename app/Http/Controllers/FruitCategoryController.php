@@ -28,13 +28,18 @@ class FruitCategoryController extends Controller
         $this->fruitCategoryService = $fruitCategoryService;
     }
 
-
+    /**
+     * @return AnonymousResourceCollection
+     */
     public function index() : AnonymousResourceCollection
     {
         return $this->fruitCategoryService->index();
     }
 
-
+    /**
+     * @param FruitCategory $fruitCategory
+     * @return FruitCategoryResource
+     */
     public function show(FruitCategory $fruitCategory) : FruitCategoryResource
     {
         return $this->fruitCategoryService->show($fruitCategory);
@@ -49,7 +54,8 @@ class FruitCategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param FruitCategoryStoreRequest $request
+     * @return FruitCategoryResource
      */
     public function store(FruitCategoryStoreRequest $request) : FruitCategoryResource
     {
@@ -69,7 +75,9 @@ class FruitCategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param FruitCategoryUpdateRequest $request
+     * @param FruitCategory $fruitCategory
+     * @return FruitCategoryResource
      */
     public function update(FruitCategoryUpdateRequest $request, FruitCategory $fruitCategory) : FruitCategoryResource
     {
@@ -77,7 +85,8 @@ class FruitCategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param FruitCategory $fruitCategory
+     * @return JsonResponse
      */
     public function destroy(FruitCategory $fruitCategory) : JsonResponse
     {

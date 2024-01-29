@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InvoiceStoreRequest;
 use App\Http\Requests\InvoiceUpdateRequest;
+use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
 use App\Services\FruitItemService;
 use App\Services\InvoiceService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class InvoiceController extends Controller
 {
@@ -25,12 +28,13 @@ class InvoiceController extends Controller
     {
         $this->invoiceService = $invoiceService;
     }
+
     /**
-     * Display a listing of the resource.
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index() : AnonymousResourceCollection
     {
-        //
+        return $this->invoiceService->index();
     }
 
     /**
@@ -42,9 +46,10 @@ class InvoiceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param InvoiceStoreRequest $request
+     * @return InvoiceResource
      */
-    public function store(InvoiceStoreRequest $request)
+    public function store(InvoiceStoreRequest $request) : InvoiceResource
     {
         return $this->invoiceService->store($request->validated());
     }
@@ -52,7 +57,7 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show(Invoice $invoice) : InvoiceResource
     {
         return $this->invoiceService->show($invoice);
     }
@@ -66,18 +71,30 @@ class InvoiceController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param InvoiceUpdateRequest $request
+     * @param Invoice $invoice
+     * @return InvoiceResource
      */
-    public function update(InvoiceUpdateRequest $request, Invoice $invoice)
+    public function update(InvoiceUpdateRequest $request, Invoice $invoice) : InvoiceResource
     {
         return $this->invoiceService->update($request->validated(),$invoice);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param Invoice $invoice
+     * @return JsonResponse
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(Invoice $invoice) : JsonResponse
     {
-        //
+        return $this->invoiceService->destroy($invoice);
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return \Illuminate\Http\Response
+     */
+    public function generatePdf(Invoice $invoice)
+    {
+        return $this->invoiceService->generatePdf($invoice);
     }
 }

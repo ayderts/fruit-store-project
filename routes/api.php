@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::prefix('fruit-categories')->group(function () {
         Route::get('/', [FruitCategoryController::class, 'index']);
         Route::get('/{fruitCategory}', [FruitCategoryController::class, 'show']);
@@ -27,8 +27,14 @@ use Illuminate\Support\Facades\Route;
     });
     Route::prefix('invoices')->group(function () {
         Route::post('/', [InvoiceController::class, 'store']);
+        Route::get('/', [InvoiceController::class, 'index']);
         Route::get('/{invoice}', [InvoiceController::class, 'show']);
         Route::patch('/{invoice}', [InvoiceController::class, 'update']);
+        Route::delete('/{invoice}', [InvoiceController::class, 'destroy']);
+        Route::get('generate-pdf/{invoice}', [InvoiceController::class, 'generatePdf']);
     });
-//});
+    Route::get('/user', [AuthController::class, 'user']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);

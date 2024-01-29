@@ -15,4 +15,10 @@ class FruitItem extends Model
     {
         return $this->belongsToMany(Invoice::class,'invoice_details')->withPivot('quantity');;
     }
+
+    public function fruit_category()
+    {
+        return $this->belongsTo(FruitCategory::class);
+    }
+
 }

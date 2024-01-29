@@ -16,7 +16,7 @@ class FruitItemResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'fruit_category_id' => $this->fruit_category_id,
+            'fruit_category' => $this->fruit_category->name,
             'unit' => $this->unit,
             'price' => $this->price,
             'invoice_id' => $this->pivot->invoice_id,
