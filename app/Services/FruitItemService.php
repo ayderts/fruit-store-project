@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Resources\FruitItemInvoiceResource;
 use App\Http\Resources\FruitItemResource;
 use App\Models\FruitItem;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +18,7 @@ class FruitItemService
     public function index() : AnonymousResourceCollection
     {
         $fruitItems = FruitItem::all();
-        return  FruitItemResource::collection($fruitItems);
+        return  FruitItemInvoiceResource::collection($fruitItems);
     }
 
     /**
@@ -44,7 +45,7 @@ class FruitItemService
      * @param FruitItem $fruitItem
      * @return FruitItemResource
      */
-    public function update(array $request, FruitItem $fruitItem)
+    public function update(array $request, FruitItem $fruitItem) : FruitItemResource
     {
         $fruitItem->update($request);
         return new FruitItemResource($fruitItem);
@@ -57,6 +58,6 @@ class FruitItemService
     public function delete(FruitItem $fruitItem) : JsonResponse
     {
         $fruitItem->delete();
-        return response()->json(['message'=>'The fruit category has been deleted']);
+        return response()->json(['message'=>'The fruit item has been deleted']);
     }
 }

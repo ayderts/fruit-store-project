@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FruitItemStoreRequest;
 use App\Http\Requests\FruitItemUpdateRequest;
+use App\Http\Resources\FruitItemInvoiceResource;
 use App\Http\Resources\FruitItemResource;
 use App\Models\FruitItem;
 use App\Services\FruitItemService;
@@ -54,10 +55,12 @@ class FruitItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param FruitItemStoreRequest $request
+     * @return FruitItemResource
      */
     public function store(FruitItemStoreRequest $request) : FruitItemResource
     {
+
         return $this->fruitItemService->store($request->validated());
     }
 

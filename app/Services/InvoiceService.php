@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceService
 {
@@ -101,6 +102,7 @@ class InvoiceService
 
         $pdf = Pdf::loadView('invoice.invoice-pdf',
             ['invoice' => $invoice,'invoice_res' => $invoice_res->jsonSerialize()]);
+        $file = Storage::disk('public')->put('invoices/'.$invoice->id.'/'. $invoice->id . '.' . 'pdf', $pdf->output());
         return $pdf->download();
     }
 }

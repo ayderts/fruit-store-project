@@ -32,6 +32,10 @@
 
 <table>
     <thead>
+    <tr class="total">
+        <td colspan="1">Customer</td>
+        <td colspan="6">{{$invoice_res['customer']}}</td>
+    </tr>
     <tr>
         <th>No</th>
         <th>Category</th>

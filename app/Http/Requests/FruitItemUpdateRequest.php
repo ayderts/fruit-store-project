@@ -22,10 +22,10 @@ class FruitItemUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'fruit_category_id'=>['required','integer','exists:fruit_categories,id'],
-            'unit' => ['required','string'],
-            'price' => ['required','integer']
+            'name'=>['string'],
+            'fruit_category_id'=>['integer','exists:fruit_categories,id'],
+            'unit' => ['string'],
+            'price' => ['integer']
         ];
     }
 }

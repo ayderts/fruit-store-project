@@ -18,7 +18,7 @@ class InvoiceResource extends JsonResource
             'id' => $this->id,
             'customer' => $this->customer_name,
             'total' => $this->getFruitsWithQuantity(),
-            'fruit_items' => FruitItemResource::collection($this->fruit_items),
+            'fruit_items' => FruitItemInvoiceResource::collection($this->fruit_items),
         ];
     }
     protected function getFruitsWithQuantity()
