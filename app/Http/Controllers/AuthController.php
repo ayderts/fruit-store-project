@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Services\AuthService;
 
@@ -37,7 +38,7 @@ class AuthController extends Controller
         return $this->authService->login($request->validated());
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request) : JsonResponse
     {
         return $this->authService->register($request->all());
     }

@@ -23,7 +23,7 @@ class AuthService
             $cookie = cookie('jwt',$token,60*24);
             return response()->json([
                 'status' => true,
-                'message' => 'Login is successful'
+                'access_token' => $token
             ])->withCookie($cookie);
         }
         return response()->json([
@@ -31,7 +31,7 @@ class AuthService
             'message' => 'Login or password are incorrect'
         ]);
     }
-    public function register($request)
+    public function register(array $request) : JsonResponse
     {
         $user = User::create([
             'name' => $request['name'],
